@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fasil Muhammad - Software Developer</title>
+    <title>Fasil Muhammad - Software Developer & Odoo Contributor</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
@@ -27,7 +26,6 @@
             padding: 0 1rem;
         }
 
-        /* Header styles */
         .header {
             position: relative;
             text-align: center;
@@ -60,11 +58,17 @@
         .subtitle {
             color: #9CA3AF;
             font-size: 1.25rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             position: relative;
         }
 
-        /* Social links */
+        .highlight {
+            color: #60A5FA;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
         .social-links {
             display: flex;
             justify-content: center;
@@ -84,7 +88,6 @@
             transform: scale(1.1);
         }
 
-        /* Card styles */
         .card {
             background-color: #1F2937;
             border: 1px solid #374151;
@@ -100,9 +103,11 @@
             margin-bottom: 1rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #374151;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        /* Tags and badges */
         .tags {
             display: flex;
             flex-wrap: wrap;
@@ -125,7 +130,6 @@
             background-color: rgba(37, 99, 235, 0.3);
         }
 
-        /* Grid layouts */
         .grid {
             display: grid;
             gap: 1rem;
@@ -140,7 +144,6 @@
             grid-template-columns: repeat(1, 1fr);
         }
 
-        /* Achievement box */
         .achievement-box {
             background-color: rgba(17, 24, 39, 0.5);
             border: 1px solid #374151;
@@ -165,7 +168,28 @@
             color: #9CA3AF;
         }
 
-        /* Responsive design */
+        .stats-card {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #60A5FA;
+            border: 1px solid #60A5FA;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: rgba(96, 165, 250, 0.1);
+        }
+
         @media (min-width: 768px) {
             .grid-2 {
                 grid-template-columns: repeat(2, 1fr);
@@ -175,14 +199,28 @@
                 grid-template-columns: repeat(3, 1fr);
             }
         }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 3px solid #60A5FA;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
+            <img src="https://avatars.githubusercontent.com/u/63807062?v=4" alt="Fasil Muhammad" class="profile-image">
             <h1 class="title">Fasil Muhammad</h1>
             <p class="subtitle">Software Developer based in Saudi Arabia</p>
+            <p class="highlight">🌟 Odoo Contributor</p>
+            <p class="text-gray">🐍 Python Developer | 💼 Odoo & Flet Expert</p>
             <div class="social-links">
+                <a href="https://github.com/fasilwdr" class="social-link" target="_blank">
+                    <i data-feather="github"></i>
+                </a>
                 <a href="https://www.linkedin.com/in/fasil-muhammad-b2911685/" class="social-link" target="_blank">
                     <i data-feather="linkedin"></i>
                 </a>
@@ -201,25 +239,34 @@
             </div>
         </header>
 
+
         <section class="card">
-            <h2 class="card-title">About Me</h2>
+            <h2 class="card-title"><i data-feather="user"></i>About Me</h2>
             <p class="text-gray">
-                I'm a passionate Software Developer specializing in Full-stack development with Odoo and Flet frameworks.
-                Currently focused on building innovative and scalable software solutions while exploring new Python technologies.
+                I'm a passionate Software Developer and Odoo Community Contributor specializing in Full-stack development.
+                Currently focused on building innovative solutions while actively contributing to the open-source community.
             </p>
             <div class="tags">
                 <span class="tag">Full-stack Development</span>
-                <span class="tag">Odoo Expert</span>
+                <span class="tag">Odoo Contributor</span>
+                <span class="tag">Open Source</span>
                 <span class="tag">Flet Developer</span>
             </div>
         </section>
 
         <section class="card">
-            <h2 class="card-title">Key Achievements</h2>
+            <h2 class="card-title"><i data-feather="award"></i>Key Achievements</h2>
             <div class="grid grid-2">
                 <div class="achievement-box">
                     <div class="achievement-title">
-                        <i data-feather="award"></i>
+                        <i data-feather="git-pull-request"></i>
+                        <span>Odoo Core Contributor</span>
+                    </div>
+                    <p class="text-gray">Active contributor with accepted core platform contributions</p>
+                </div>
+                <div class="achievement-box">
+                    <div class="achievement-title">
+                        <i data-feather="package"></i>
                         <span>Odoo Module Publisher</span>
                     </div>
                     <p class="text-gray">Published custom modules on the Odoo App Store</p>
@@ -229,18 +276,34 @@
                         <i data-feather="smartphone"></i>
                         <span>Mobile App Developer</span>
                     </div>
-                    <p class="text-gray">Published multiple mobile apps using Flet framework</p>
+                    <p class="text-gray">Published multiple apps using Flet framework</p>
+                </div>
+                <div class="achievement-box">
+                    <div class="achievement-title">
+                        <i data-feather="settings"></i>
+                        <span>Business Automation</span>
+                    </div>
+                    <p class="text-gray">Developing Automated Business Workflows for Our Organization</p>
                 </div>
             </div>
         </section>
 
         <section class="card">
-            <h2 class="card-title">Tech Stack</h2>
+            <h2 class="card-title"><i data-feather="code"></i>Tech Stack</h2>
             <div class="tags">
+                <!-- Core Technologies -->
                 <span class="tag">Python</span>
                 <span class="tag">JavaScript</span>
                 <span class="tag">Odoo</span>
                 <span class="tag">Flet</span>
+                <!-- AI & ML -->
+                <span class="tag">OpenAI API</span>
+                <span class="tag">LangChain</span>
+                <span class="tag">TensorFlow</span>
+                <!-- API Integrations -->
+                <span class="tag">REST APIs</span>
+                <span class="tag">GraphQL</span>
+                <span class="tag">Websockets</span>
                 <span class="tag">Docker</span>
                 <span class="tag">Firebase</span>
                 <span class="tag">PostgreSQL</span>
@@ -250,26 +313,35 @@
         </section>
 
         <section class="card">
-            <h2 class="card-title">Currently Exploring</h2>
+            <h2 class="card-title"><i data-feather="trending-up"></i>Currently Exploring</h2>
             <div class="grid grid-3">
                 <div class="achievement-box">
-                    <h3 class="achievement-title">Advanced Odoo Development</h3>
-                    <p class="text-gray">Custom module development and integration</p>
+                    <h3 class="achievement-title">
+                        <i data-feather="code"></i>
+                        Odoo Core Development
+                    </h3>
+                    <p class="text-gray">Contributing to community and core features</p>
                 </div>
                 <div class="achievement-box">
-                    <h3 class="achievement-title">Microservices</h3>
+                    <h3 class="achievement-title">
+                        <i data-feather="server"></i>
+                        Microservices
+                    </h3>
                     <p class="text-gray">API integration and architecture</p>
                 </div>
                 <div class="achievement-box">
-                    <h3 class="achievement-title">Cross-platform Apps</h3>
+                    <h3 class="achievement-title">
+                        <i data-feather="smartphone"></i>
+                        Cross-platform Apps
+                    </h3>
                     <p class="text-gray">Building with Flutter and Flet</p>
                 </div>
             </div>
         </section>
+
     </div>
 
     <script>
-        // Initialize Feather Icons
         feather.replace();
     </script>
 </body>

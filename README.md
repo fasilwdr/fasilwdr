@@ -1,6 +1,7 @@
 # Hi, I'm Fasil 👋
 
 👨‍💻 **Software Developer** based in Saudi Arabia  
+🌟 **Odoo Contributor**  
 💼 Currently working with **Odoo** and **Flet** frameworks  
 🐍 Passionate about learning and exploring new **Python** technologies  
 🌍 Love traveling and discovering new aspects of the world  
@@ -11,10 +12,11 @@
 
 I specialize in:  
 - **Full-stack development** with Odoo and Flet  
+- **Contributing to Odoo Community** and building open-source solutions
 - Customizing and building tailored solutions for businesses  
 - Exploring the latest Python libraries and frameworks  
 
-🎯 **Goal:** To master Python programming and leverage it to build innovative and scalable software solutions.
+🎯 **Goal:** To master Python programming and leverage it to build innovative and scalable software solutions while actively contributing to the open-source community.
 
 ---
 
@@ -31,18 +33,20 @@ I specialize in:
 ### 🛠️ Open to:  
 
 - **Collaborations** in Python-based projects  
+- **Odoo Community** contributions and partnerships
 - **Freelance** opportunities in Odoo and Flet development  
 - Sharing knowledge and learning from the tech community  
 
-✨ Let’s build something amazing together!
+✨ Let's build something amazing together!
 
 ---
 
 ### 🏆 Key Achievements  
 
-- Successfully implemented Odoo solutions for my company and other businesses.  
-- [Published a custom Odoo module](https://apps.odoo.com/apps/modules/browse?author=Fasil) on the Odoo App Store.  
-- [Developed and published mobile apps](https://play.google.com/store/apps/dev?id=8315787194226926741) using Flet.  
+- **Active Odoo Community Contributor** with accepted contributions to the core platform
+- Successfully implemented Odoo solutions for my company and other businesses  
+- [Published a custom Odoo module](https://apps.odoo.com/apps/modules/browse?author=Fasil) on the Odoo App Store  
+- [Developed and published mobile apps](https://play.google.com/store/apps/dev?id=8315787194226926741) using Flet  
 
 ---
 
@@ -57,7 +61,7 @@ I specialize in:
 
 ### 🌱 Currently Exploring  
 
-- Advanced Odoo module development  
+- Advanced Odoo module development and core contributions
 - Microservices and API integration  
 - Building cross-platform apps with Flutter and Flet  
 
