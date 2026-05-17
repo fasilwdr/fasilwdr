@@ -3,346 +3,1066 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fasil Muhammad - Software Developer & Odoo Contributor</title>
+    <title>Fasil Muhammad — Odoo Developer & Open-source Contributor</title>
+    <meta name="description" content="Fasil Muhammad — Odoo Developer, Odoo Community Contributor, and Python/Flet engineer. 17 Odoo Apps Store modules, open-source tooling, and custom enterprise solutions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        :root {
+            --bg-0: #05060a;
+            --bg-1: #0b0e16;
+            --bg-2: #111521;
+            --surface: rgba(20, 24, 38, 0.55);
+            --surface-2: rgba(28, 33, 51, 0.65);
+            --border: rgba(99, 119, 169, 0.18);
+            --border-strong: rgba(120, 145, 200, 0.35);
+            --text: #e7ecf5;
+            --text-dim: #9aa4bd;
+            --text-mute: #6c7691;
+            --accent: #7c8cff;
+            --accent-2: #b06bff;
+            --accent-3: #2bd4d9;
+            --accent-warm: #ff8a5b;
+            --grad: linear-gradient(135deg, #7c8cff 0%, #b06bff 50%, #2bd4d9 100%);
+            --grad-warm: linear-gradient(135deg, #ff8a5b 0%, #b06bff 100%);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: #111827;
-            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-0);
+            color: var(--text);
             line-height: 1.6;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            max-width: 1024px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .header {
+            overflow-x: hidden;
+            min-height: 100vh;
             position: relative;
-            text-align: center;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 0.5rem;
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid #374151;
-            overflow: hidden;
         }
 
-        .header::before {
+        /* Animated background */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at top, rgba(124, 140, 255, 0.18), transparent 55%),
+                radial-gradient(ellipse at bottom, rgba(176, 107, 255, 0.13), transparent 55%),
+                var(--bg-0);
+        }
+
+        .bg-glow::before, .bg-glow::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, rgba(59,130,246,0.1), rgba(147,51,234,0.1));
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.45;
+            animation: float 20s ease-in-out infinite;
+        }
+        .bg-glow::before {
+            background: radial-gradient(circle, #7c8cff 0%, transparent 70%);
+            top: -10%;
+            left: -10%;
+        }
+        .bg-glow::after {
+            background: radial-gradient(circle, #2bd4d9 0%, transparent 70%);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.95); }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image:
+                linear-gradient(rgba(124, 140, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 140, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
             pointer-events: none;
         }
 
-        .title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            position: relative;
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(5, 6, 10, 0.6);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
         }
 
-        .subtitle {
-            color: #9CA3AF;
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-
-        .highlight {
-            color: #60A5FA;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            position: relative;
-        }
-
-        .social-link {
-            color: #9CA3AF;
-            padding: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            color: #60A5FA;
-            transform: scale(1.1);
-        }
-
-        .card {
-            background-color: #1F2937;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #374151;
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-        .tags {
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-brand-mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--grad);
+            display: grid;
+            place-items: center;
+            color: white;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 20px rgba(124, 140, 255, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        @media (max-width: 720px) {
+            .nav-links { display: none; }
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-inline: 2rem;
+        }
+
+        section { padding-block: 6rem; }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .badge-pill {
+            display: flex;
+            width: fit-content;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            margin: 0 auto 1.75rem;
+            backdrop-filter: blur(10px);
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        .badge-pill .dot {
+            width: 7px;
+            height: 7px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #4ade80;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .avatar-wrap {
+            display: block;
+            width: fit-content;
+            position: relative;
+            margin: 0 auto 1.5rem;
+            animation: fadeUp 0.8s ease-out 0.1s backwards;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: var(--grad);
+            animation: spin 8s linear infinite;
+            filter: blur(0.5px);
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .avatar {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid var(--bg-0);
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 1rem;
+            animation: fadeUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .hero h1 .gradient {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            color: var(--text-dim);
+            max-width: 680px;
+            margin: 0 auto 2rem;
+            animation: fadeUp 0.8s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-roles {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.8s ease-out 0.4s backwards;
         }
 
-        .tag {
-            background-color: rgba(37, 99, 235, 0.2);
-            color: #93C5FD;
-            padding: 0.25rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            border: 1px solid #2563EB;
-            transition: all 0.3s ease;
+        .role-chip {
+            padding: 0.45rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .role-chip:hover {
+            border-color: var(--accent);
+            color: var(--text);
+            transform: translateY(-2px);
         }
 
-        .tag:hover {
-            border-color: #60A5FA;
-            background-color: rgba(37, 99, 235, 0.3);
-        }
-
-        .grid {
-            display: grid;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .grid-2 {
-            grid-template-columns: repeat(1, 1fr);
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(1, 1fr);
-        }
-
-        .achievement-box {
-            background-color: rgba(17, 24, 39, 0.5);
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .achievement-box:hover {
-            border-color: #3B82F6;
-        }
-
-        .achievement-title {
+        .hero-ctas {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: white;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 3rem;
+            animation: fadeUp 0.8s ease-out 0.5s backwards;
         }
 
-        .text-gray {
-            color: #9CA3AF;
-        }
-
-        .stats-card {
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .btn-outline {
+        .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: #60A5FA;
-            border: 1px solid #60A5FA;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
             text-decoration: none;
-            margin-top: 1rem;
+            transition: all 0.25s;
+            border: 1px solid transparent;
         }
 
-        .btn-outline:hover {
-            background: rgba(96, 165, 250, 0.1);
+        .btn-primary {
+            background: var(--grad);
+            color: white;
+            box-shadow: 0 8px 25px rgba(124, 140, 255, 0.35);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(124, 140, 255, 0.5);
         }
 
-        @media (min-width: 768px) {
-            .grid-2 {
-                grid-template-columns: repeat(2, 1fr);
+        .btn-ghost {
+            background: var(--surface);
+            color: var(--text);
+            border-color: var(--border-strong);
+            backdrop-filter: blur(10px);
+        }
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            background: var(--surface-2);
+            transform: translateY(-2px);
+        }
+
+        .btn svg { width: 18px; height: 18px; }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            animation: fadeUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-dim);
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(124, 140, 255, 0.25);
+        }
+        .social-icon svg { width: 18px; height: 18px; }
+
+        /* Stats strip */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 4rem 0 0;
+            animation: fadeUp 0.8s ease-out 0.7s backwards;
+        }
+
+        .stat {
+            padding: 1.5rem 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--grad);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+        .stat:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+        }
+
+        .stat-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Section header */
+        .section-head {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-sub {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            padding: 1px;
+            background: linear-gradient(135deg, transparent, rgba(124, 140, 255, 0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+        }
+        .card:hover::before { opacity: 1; }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 11px;
+            background: linear-gradient(135deg, rgba(124, 140, 255, 0.2), rgba(176, 107, 255, 0.2));
+            border: 1px solid var(--border);
+            display: grid;
+            place-items: center;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .card-icon svg { width: 22px; height: 22px; }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* What I do grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .project-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-head h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 0.6rem;
+            font-size: 0.78rem;
+            color: var(--text-mute);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .project-stats span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .project-stats svg { width: 14px; height: 14px; }
+
+        .project-card p { flex: 1; }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 1.25rem;
+        }
+
+        .project-tags .tag-mini {
+            font-size: 0.72rem;
+            padding: 0.2rem 0.6rem;
+            background: rgba(124, 140, 255, 0.08);
+            border: 1px solid rgba(124, 140, 255, 0.2);
+            border-radius: 999px;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Tech stack */
+        .tech-groups {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        .tech-group {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .tech-group h4 {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-mute);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.45rem 0.9rem;
+            background: rgba(124, 140, 255, 0.08);
+            border: 1px solid rgba(124, 140, 255, 0.2);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .tech-tag:hover {
+            background: rgba(124, 140, 255, 0.15);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        @media (min-width: 900px) {
+            .tech-groups { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(124, 140, 255, 0.15), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(176, 107, 255, 0.15), transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-mute);
+            font-size: 0.88rem;
+        }
+
+        footer a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        footer a:hover { color: var(--accent); }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
-
-            .grid-3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            border: 3px solid #60A5FA;
-            box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+            .reveal { opacity: 1; transform: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <img src="https://avatars.githubusercontent.com/u/63807062?v=4" alt="Fasil Muhammad" class="profile-image">
-            <h1 class="title">Fasil Muhammad</h1>
-            <p class="subtitle">Software Developer based in Saudi Arabia</p>
-            <p class="highlight">🌟 Odoo Contributor</p>
-            <p class="text-gray">🐍 Python Developer | 💼 Odoo & Flet Expert</p>
-            <div class="social-links">
-                <a href="https://github.com/fasilwdr" class="social-link" target="_blank">
-                    <i data-feather="github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/fasil-muhammad-b2911685/" class="social-link" target="_blank">
-                    <i data-feather="linkedin"></i>
-                </a>
-                <a href="https://instagram.com/fasilwdr" class="social-link" target="_blank">
-                    <i data-feather="instagram"></i>
-                </a>
-                <a href="https://facebook.com/fasilwdr" class="social-link" target="_blank">
-                    <i data-feather="facebook"></i>
-                </a>
-                <a href="https://twitter.com/fasilwdr" class="social-link" target="_blank">
-                    <i data-feather="twitter"></i>
-                </a>
-                <a href="https://wa.me/966538952934" class="social-link" target="_blank">
-                    <i data-feather="message-circle"></i>
-                </a>
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <div class="nav-brand-mark">F</div>
+                <span>fasilwdr</span>
             </div>
-        </header>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#stack">Stack</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <header class="hero container">
+        <div class="badge-pill">
+            <span class="dot"></span>
+            <span>Available for new collaborations</span>
+        </div>
 
-        <section class="card">
-            <h2 class="card-title"><i data-feather="user"></i>About Me</h2>
-            <p class="text-gray">
-                I'm a passionate Software Developer and Odoo Community Contributor specializing in Full-stack development.
-                Currently focused on building innovative solutions while actively contributing to the open-source community.
-            </p>
-            <div class="tags">
-                <span class="tag">Full-stack Development</span>
-                <span class="tag">Odoo Contributor</span>
-                <span class="tag">Open Source</span>
-                <span class="tag">Flet Developer</span>
+        <div class="avatar-wrap">
+            <div class="avatar-ring"></div>
+            <img src="https://avatars.githubusercontent.com/u/63807062?v=4" alt="Fasil Muhammad" class="avatar">
+        </div>
+
+        <h1>Hi, I'm <span class="gradient">Fasil Muhammad</span></h1>
+        <p class="tagline">
+            Odoo Developer · Community Contributor · Python & Flet Engineer building business software,
+            internal tools, and open-source libraries used across the Odoo ecosystem.
+        </p>
+
+        <div class="hero-roles">
+            <span class="role-chip">🧩 Odoo Developer</span>
+            <span class="role-chip">🌟 Odoo Contributor</span>
+            <span class="role-chip">🐍 Python Engineer</span>
+            <span class="role-chip">📱 Flet · Cross-platform</span>
+            <span class="role-chip">📦 Open-source Maintainer</span>
+        </div>
+
+        <div class="hero-ctas">
+            <a href="#projects" class="btn btn-primary">
+                <i data-feather="layers"></i>
+                View Projects
+            </a>
+            <a href="https://github.com/fasilwdr" class="btn btn-ghost" target="_blank" rel="noopener">
+                <i data-feather="github"></i>
+                GitHub Profile
+            </a>
+        </div>
+
+        <div class="socials">
+            <a href="https://github.com/fasilwdr" class="social-icon" target="_blank" rel="noopener" aria-label="GitHub"><i data-feather="github"></i></a>
+            <a href="https://www.linkedin.com/in/fasil-muhammad-b2911685/" class="social-icon" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-feather="linkedin"></i></a>
+            <a href="https://twitter.com/fasilwdr" class="social-icon" target="_blank" rel="noopener" aria-label="X / Twitter"><i data-feather="twitter"></i></a>
+            <a href="https://instagram.com/fasilwdr" class="social-icon" target="_blank" rel="noopener" aria-label="Instagram"><i data-feather="instagram"></i></a>
+            <a href="https://facebook.com/fasilwdr" class="social-icon" target="_blank" rel="noopener" aria-label="Facebook"><i data-feather="facebook"></i></a>
+            <a href="https://wa.me/966538952934" class="social-icon" target="_blank" rel="noopener" aria-label="WhatsApp"><i data-feather="message-circle"></i></a>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-num">250+</div>
+                <div class="stat-label">Odoo Modules Developed</div>
             </div>
-        </section>
+            <div class="stat">
+                <div class="stat-num">25+</div>
+                <div class="stat-label">Odoo Apps Published</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">2000+</div>
+                <div class="stat-label">Module Downloads</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">5+</div>
+                <div class="stat-label">Open-source Tools</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">5+</div>
+                <div class="stat-label">PyPI Packages</div>
+            </div>
+        </div>
+    </header>
 
-        <section class="card">
-            <h2 class="card-title"><i data-feather="award"></i>Key Achievements</h2>
-            <div class="grid grid-2">
-                <div class="achievement-box">
-                    <div class="achievement-title">
-                        <i data-feather="git-pull-request"></i>
-                        <span>Odoo Core Contributor</span>
+    <section id="about" class="container reveal">
+        <div class="section-head">
+            <div class="section-eyebrow">What I do</div>
+            <h2 class="section-title">Engineered for real business impact</h2>
+            <p class="section-sub">From ERP customizations to internal mobile apps — I build software that ships and gets used every day.</p>
+        </div>
+
+        <div class="skills-grid">
+            <div class="card">
+                <div class="card-icon"><i data-feather="package"></i></div>
+                <h3>Odoo Development</h3>
+                <p>Custom modules, integrations, data migrations, and full-stack ERP customizations across Odoo versions.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i data-feather="git-pull-request"></i></div>
+                <h3>Odoo Community Contributor</h3>
+                <p>Accepted contributions to the upstream Odoo platform and active engagement with the OCA ecosystem.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i data-feather="briefcase"></i></div>
+                <h3>On-demand Tools for Saudi Companies</h3>
+                <p>Delivered tailored Odoo solutions, integrations, and business automations for enterprises across Saudi Arabia.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i data-feather="smartphone"></i></div>
+                <h3>Internal Desktop & Mobile Apps</h3>
+                <p>Designed and shipped cross-platform desktop and mobile apps with Flet/Flutter for internal business operations.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i data-feather="code"></i></div>
+                <h3>Open-source Maintainer</h3>
+                <p>Python packages on PyPI and developer tooling adopted by the Odoo and Flet communities worldwide.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i data-feather="link"></i></div>
+                <h3>Systems Integration</h3>
+                <p>Bridging Odoo with MS SQL, REST APIs, JSON-RPC, and external services to keep data flowing between systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container reveal">
+        <div class="section-head">
+            <div class="section-eyebrow">Published work</div>
+            <h2 class="section-title">Projects in production</h2>
+            <p class="section-sub">A snapshot of modules and tooling actively used by the Odoo and Python communities.</p>
+        </div>
+
+        <div class="projects-grid">
+            <a href="https://apps.odoo.com/apps/modules/browse?author=Fasil" target="_blank" rel="noopener" class="card project-card">
+                <div class="project-head">
+                    <h3>🛍️ Odoo Apps Store</h3>
+                    <div class="project-stats">
+                        <span><i data-feather="package"></i> 25+</span>
+                        <span><i data-feather="download"></i> 2k+</span>
                     </div>
-                    <p class="text-gray">Active contributor with accepted core platform contributions</p>
                 </div>
-                <div class="achievement-box">
-                    <div class="achievement-title">
-                        <i data-feather="package"></i>
-                        <span>Odoo Module Publisher</span>
-                    </div>
-                    <p class="text-gray">Published custom modules on the Odoo App Store</p>
+                <p>25+ published modules on the official Odoo Apps Store — from free utilities (DropBox backup, MS SQL Query, Backend POS) to enterprise integrations and custom workflows. Combined 2,000+ downloads.</p>
+                <div class="project-tags">
+                    <span class="tag-mini">Odoo</span>
+                    <span class="tag-mini">Modules</span>
+                    <span class="tag-mini">Enterprise</span>
                 </div>
-                <div class="achievement-box">
-                    <div class="achievement-title">
-                        <i data-feather="smartphone"></i>
-                        <span>Mobile App Developer</span>
+            </a>
+
+            <a href="https://github.com/fasilwdr/OdooUpgrader" target="_blank" rel="noopener" class="card project-card">
+                <div class="project-head">
+                    <h3>⬆️ OdooUpgrader</h3>
+                    <div class="project-stats">
+                        <span><i data-feather="star"></i> 24</span>
+                        <span><i data-feather="git-branch"></i> 17</span>
                     </div>
-                    <p class="text-gray">Published multiple apps using Flet framework</p>
                 </div>
-                <div class="achievement-box">
-                    <div class="achievement-title">
-                        <i data-feather="settings"></i>
-                        <span>Business Automation</span>
+                <p>Professional CLI tool that automates Odoo database upgrades using OCA's OpenUpgrade framework — modernize an Odoo system in a single command.</p>
+                <div class="project-tags">
+                    <span class="tag-mini">Python</span>
+                    <span class="tag-mini">CLI</span>
+                    <span class="tag-mini">Odoo</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/fasilwdr/Flet-Model" target="_blank" rel="noopener" class="card project-card">
+                <div class="project-head">
+                    <h3>🧭 Flet-Model</h3>
+                    <div class="project-stats">
+                        <span><i data-feather="star"></i> 16</span>
+                        <span><i data-feather="git-branch"></i> 4</span>
                     </div>
-                    <p class="text-gray">Developing Automated Business Workflows for Our Organization</p>
+                </div>
+                <p>Model-based router for Flet applications. Streamlines multi-page apps with nested routing, state management, event binding, and view caching.</p>
+                <div class="project-tags">
+                    <span class="tag-mini">Flet</span>
+                    <span class="tag-mini">PyPI</span>
+                    <span class="tag-mini">Framework</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/fasilwdr/pyodoo_connector" target="_blank" rel="noopener" class="card project-card">
+                <div class="project-head">
+                    <h3>🔗 PyOdooConnector</h3>
+                    <div class="project-stats">
+                        <span><i data-feather="star"></i> 3</span>
+                        <span><i data-feather="git-branch"></i> 1</span>
+                    </div>
+                </div>
+                <p>Python package for interacting with Odoo over JSON-RPC. Clean, Pythonic API for reading, writing, and orchestrating Odoo data from any script.</p>
+                <div class="project-tags">
+                    <span class="tag-mini">Python</span>
+                    <span class="tag-mini">JSON-RPC</span>
+                    <span class="tag-mini">Odoo</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/fasilwdr/md2indexhtml" target="_blank" rel="noopener" class="card project-card">
+                <div class="project-head">
+                    <h3>📄 md2indexhtml</h3>
+                    <div class="project-stats">
+                        <span><i data-feather="star"></i> 1</span>
+                        <span><i data-feather="package"></i> PyPI</span>
+                    </div>
+                </div>
+                <p>Converts Markdown files into Odoo-styled <code>index.html</code> pages for module documentation — responsive, accessible, and theme-consistent.</p>
+                <div class="project-tags">
+                    <span class="tag-mini">Markdown</span>
+                    <span class="tag-mini">Odoo</span>
+                    <span class="tag-mini">Docs</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/fasilwdr/MD-Extractor" target="_blank" rel="noopener" class="card project-card">
+                <div class="project-head">
+                    <h3>🌳 MD-Extractor</h3>
+                    <div class="project-stats">
+                        <span><i data-feather="github"></i> Open</span>
+                    </div>
+                </div>
+                <p>Turn any Markdown document into a navigable tree of sections keyed by header. Pull blocks, plain text, JSON, or HTML — with optional XPath filtering.</p>
+                <div class="project-tags">
+                    <span class="tag-mini">Python</span>
+                    <span class="tag-mini">Parser</span>
+                    <span class="tag-mini">XPath</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="stack" class="container reveal">
+        <div class="section-head">
+            <div class="section-eyebrow">Tech stack</div>
+            <h2 class="section-title">Tools I work with</h2>
+            <p class="section-sub">Battle-tested across production Odoo deployments and shipped apps.</p>
+        </div>
+
+        <div class="tech-groups">
+            <div class="tech-group">
+                <h4>Languages & Frameworks</h4>
+                <div class="tech-list">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Odoo</span>
+                    <span class="tech-tag">Flet</span>
+                    <span class="tech-tag">Reflex</span>
+                    <span class="tech-tag">OWL</span>
+                    <span class="tech-tag">XML / QWeb</span>
                 </div>
             </div>
-        </section>
 
-        <section class="card">
-            <h2 class="card-title"><i data-feather="code"></i>Tech Stack</h2>
-            <div class="tags">
-                <!-- Core Technologies -->
-                <span class="tag">Python</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">Odoo</span>
-                <span class="tag">Flet</span>
-                <!-- AI & ML -->
-                <span class="tag">OpenAI API</span>
-                <span class="tag">LangChain</span>
-                <span class="tag">TensorFlow</span>
-                <!-- API Integrations -->
-                <span class="tag">REST APIs</span>
-                <span class="tag">GraphQL</span>
-                <span class="tag">Websockets</span>
-                <span class="tag">Docker</span>
-                <span class="tag">Firebase</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">Git</span>
-                <span class="tag">GitHub</span>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="card-title"><i data-feather="trending-up"></i>Currently Exploring</h2>
-            <div class="grid grid-3">
-                <div class="achievement-box">
-                    <h3 class="achievement-title">
-                        <i data-feather="code"></i>
-                        Odoo Core Development
-                    </h3>
-                    <p class="text-gray">Contributing to community and core features</p>
-                </div>
-                <div class="achievement-box">
-                    <h3 class="achievement-title">
-                        <i data-feather="server"></i>
-                        Microservices
-                    </h3>
-                    <p class="text-gray">API integration and architecture</p>
-                </div>
-                <div class="achievement-box">
-                    <h3 class="achievement-title">
-                        <i data-feather="smartphone"></i>
-                        Cross-platform Apps
-                    </h3>
-                    <p class="text-gray">Building with Flet</p>
+            <div class="tech-group">
+                <h4>Data & Infrastructure</h4>
+                <div class="tech-list">
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">MS SQL Server</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">REST APIs</span>
+                    <span class="tech-tag">JSON-RPC</span>
                 </div>
             </div>
-        </section>
 
-    </div>
+            <div class="tech-group">
+                <h4>Tools & Platforms</h4>
+                <div class="tech-list">
+                    <span class="tech-tag">Git</span>
+                    <span class="tech-tag">GitHub</span>
+                    <span class="tech-tag">GitHub Actions</span>
+                    <span class="tech-tag">PyCharm</span>
+                    <span class="tech-tag">Linux</span>
+                    <span class="tech-tag">Nginx</span>
+                    <span class="tech-tag">Cloudflare Pages</span>
+                    <span class="tech-tag">PyPI</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container reveal">
+        <div class="cta">
+            <div class="cta-content">
+                <h2>Let's build something amazing</h2>
+                <p>
+                    Open to Odoo consulting, freelance work, custom module development,
+                    and open-source collaborations. Drop me a message — I'd love to hear about your project.
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/966538952934" target="_blank" rel="noopener" class="btn btn-primary">
+                        <i data-feather="message-circle"></i> WhatsApp
+                    </a>
+                    <a href="https://www.linkedin.com/in/fasil-muhammad-b2911685/" target="_blank" rel="noopener" class="btn btn-ghost">
+                        <i data-feather="linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/fasilwdr" target="_blank" rel="noopener" class="btn btn-ghost">
+                        <i data-feather="github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container">
+        <p>© <span id="year"></span> Fasil Muhammad. All rights reserved.</p>
+    </footer>
 
     <script>
         feather.replace();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Reveal on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        reveals.forEach(el => io.observe(el));
+
+        // Animated counter for stats
+        const animateNum = (el) => {
+            const text = el.textContent.trim();
+            const match = text.match(/([\d,]+)(.*)/);
+            if (!match) return;
+            const target = parseInt(match[1].replace(/,/g, ''), 10);
+            const suffix = match[2] || '';
+            const duration = 1400;
+            const start = performance.now();
+            const tick = (now) => {
+                const p = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                const value = Math.floor(target * eased);
+                el.textContent = value.toLocaleString() + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+                else el.textContent = target.toLocaleString() + suffix;
+            };
+            requestAnimationFrame(tick);
+        };
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateNum(entry.target);
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-num').forEach(el => statObserver.observe(el));
     </script>
 </body>
 </html>
